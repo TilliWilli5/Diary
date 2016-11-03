@@ -1,0 +1,145 @@
+#diary
+{
+    /*border-radius:2px;
+    border:1px solid lightgrey;*/
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    font-size:2em;
+    color:slategrey;
+}
+#noteList
+{
+    display: flex;
+    flex-direction: column;
+}
+    .note
+    {
+        display: flex;
+        flex-wrap: wrap;
+        position:relative;
+        cursor: pointer;
+    }
+        /*.note::before
+        {
+            content:"";
+            position:absolute;
+            border-top:1px solid lightgrey;
+            border-bottom:1px solid lightgrey;
+            width:100%;
+            height:100%;
+            transform: scale(0, 1);
+            transition: transform 0.4s;
+            pointer-events: none;
+        }
+        .note:hover::before
+        {
+            transform: scale(1, 1);
+            transition: transform 0.4s;
+        }*/
+    .noteHandle
+    {
+        text-align: center;
+        border-radius:0.4em;
+        width:0.4em;
+        height:0.4em;
+        border:1px solid slategrey;
+        /*Отступ слева*/
+        margin-left:8px;
+        /*Автоматическое выравнивание по высоте*/
+        margin-top:auto;
+        margin-bottom:auto;
+        /*Отступ для последующей записи*/
+        margin-right:8px;
+    }
+        .noteHandle:hover
+        {
+            border-width: 0.1em;
+            border-color: deepskyblue;
+        }
+        .noteHandle:hover 
+        {
+            border-color: deepskyblue;
+        }
+    .noteBody
+    {
+        cursor:inherit;
+        display:flex;
+        flex-direction: column;
+    }
+        .noteTitle
+        {
+            text-align: left;
+        }
+            .noteTitle:hover
+            {
+                color:deepskyblue;
+            }
+            .noteTitle:hover
+            {
+                color:deepskyblue;
+            }
+        .noteDesc
+        {
+            display:none;
+            max-height: 0;
+            overflow: hidden;
+            /*border:1px solid black;*/
+            /*animation:yScaleUp 1s forwards;*/
+        }
+        .noteTagField
+        {
+            display:none;
+            max-height: 0;
+            overflow: hidden;
+            /*border:1px solid black;*/
+            /*animation:yScaleUp 1s forwards;*/
+        }
+    .noteUnderline, .noteOverline
+    {
+        border-left:0px;
+        border-right:0px;
+        border-top:0px;
+        border-bottom:1px solid lightgrey;
+        flex:100%;
+        transform: scale(0.0, 1.0);
+        margin-top:0px;
+        margin-bottom:0px;
+    }
+        /*note:hove .noteUnderline
+        {
+            border-left:0px;
+            border-right:0px;
+            border-top:0px;
+            border-bottom:1px solid lightgrey;
+            flex:100%;
+            transform: scale(0.0, 1.0);
+        }*/
+
+/*
+======================================
+Footer part
+======================================
+*/
+#diaryActionBar
+{
+    display: flex;
+    justify-content: space-around;
+}
+    .diaryActionButton
+    {
+        border-radius:2px;
+        border:1px solid slategrey;
+        font-size:0.75em;
+        text-align:center;
+        margin:auto;
+        cursor:pointer;
+        padding:4px;
+    }
+        .diaryActionButton:hover
+        {
+            color:white;
+            /*background-color:slategrey;*/
+            border-color:deepskyblue;
+            color:deepskyblue;
+        }
