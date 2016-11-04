@@ -15,14 +15,16 @@ class Note extends Emitter
         theView.ctrl = this;
         theView.className = "note";
         //Assigning handlers
-        let eventName = document.body.ontouchstart?"touchstart":"click";
-        this.AssignHandlers(".noteTitle", eventName, [this.NoteBodyClickHandler]);
+        // let eventName = document.body.ontouchstart?"touchstart":"click";
+        // this.AssignHandlers(".noteTitle", eventName, [this.NoteBodyClickHandler]);
         let hammerManager = new Hammer.Manager(this.view, {
             recognizers:[
-                [Hammer.Swipe, {direction:Hammer.DIRECTION_ALL}]
+                [Hammer.Swipe, {direction:Hammer.DIRECTION_ALL}],
+                [Hammer.Tap]
             ]
         });
         hammerManager.on("swipe", function(pEvent){
+            // console.log(pEvent);
             let note = util.FindParent(pEvent.target, ".note", true);
             switch(pEvent.direction)
             {
@@ -31,6 +33,11 @@ class Note extends Emitter
                 case Hammer.DIRECTION_LEFT:note.ctrl.Emit("swipeLeft", note);break;
                 case Hammer.DIRECTION_RIGHT:note.ctrl.Emit("swipeRight", note);break;
             }
+        });
+        hammerManager.on("tap", function(pEvent){
+            // console.log(pEvent);
+            let note = util.FindParent(pEvent.target, ".note", true);
+            note.ctrl.Emit("tap", note);
         });
             let theHandle = document.createElement("div");
             theHandle.className = "noteHandle";
@@ -87,8 +94,26 @@ class Note extends Emitter
     Expand(){
         let desc = this.view.querySelector(".noteDesc");
         let tagField = this.view.querySelector(".noteTagField");
-        // let noteDesc = pEvent.target.nextElementSibling;
-        // if(noteDesc.style.display === "none" || noteDesc.style.display === "")
+        if(desc.style.animationName === "yScaleDown" || desc.style.animationName === "")
+        {
+            desc.style.display = "initial";
+            tagField.style.display = "initial";
+            desc.style.animation = "yScaleUp 0.3s forwards";
+            tagField.style.animation = "yScaleUp 0.3s forwards ease-out";
+        }
+    }
+    Fold(){
+        let desc = this.view.querySelector(".noteDesc");
+        let tagField = this.view.querySelector(".noteTagField");
+        if(desc.style.animationName === "yScaleUp")
+        {
+            desc.style.animation = "yScaleDown 0.3s reverse forwards";
+            tagField.style.animation = "yScaleDown 0.3s reverse forwards ease-out";
+        }
+    }
+    Toogle(){
+        let desc = this.view.querySelector(".noteDesc");
+        let tagField = this.view.querySelector(".noteTagField");
         if(desc.style.animationName === "yScaleDown" || desc.style.animationName === "")
         {
             desc.style.display = "initial";
@@ -97,17 +122,6 @@ class Note extends Emitter
             tagField.style.animation = "yScaleUp 0.3s forwards ease-out";
         }
         else
-        {
-            // noteDesc.style.display = "none";
-            // noteDesc.nextElementSibling.style.display = "none";
-            desc.style.animation = "yScaleDown 0.3s reverse forwards";
-            tagField.style.animation = "yScaleDown 0.3s reverse forwards ease-out";
-        }
-    }
-    Fold(){
-        let desc = this.view.querySelector(".noteDesc");
-        let tagField = this.view.querySelector(".noteTagField");
-        if(desc.style.animationName === "yScaleUp")
         {
             desc.style.animation = "yScaleDown 0.3s reverse forwards";
             tagField.style.animation = "yScaleDown 0.3s reverse forwards ease-out";

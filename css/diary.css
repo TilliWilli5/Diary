@@ -152,6 +152,7 @@ Footer part
     display: flex;
     justify-content: space-around;
     flex:1;
+    max-height:0;
     /*align-self: flex-end;*/
 }
     .diaryActionButton
@@ -167,7 +168,13 @@ Footer part
         .diaryActionButton:hover
         {
             color:white;
-            /*background-color:slategrey;*/
             border-color:deepskyblue;
             color:deepskyblue;
+        }
+        #diaryDeleteBtn:hover
+        {
+            color:white;
+            border-color:indianred;
+            color:indianred;
+
         }
