@@ -1,7 +1,8 @@
 "use strict";
-class Diary
+class Diary extends Emitter
 {
     constructor(){
+        super();
         this.view = null;
     }
     AttachTo(pShelter){
@@ -30,32 +31,39 @@ class Diary
             });
         }
     }
+    //Inner Methods
+    NoteIndex(pNote){
+        let noteList = util.FindParent(pNote, "#noteList", true);
+        let noteIndex = Array.prototype.indexOf.call(noteList.children, pNote);
+    }
     //Handlers
     NoteTitleClickHandler(pEvent){
         
     }
-    //Events
-    ExpandNote(pNote){
-        let noteDesc = pEvent.target.nextElementSibling;
-        // if(noteDesc.style.display === "none" || noteDesc.style.display === "")
-        if(noteDesc.style.animationName === "yScaleDown" || noteDesc.style.animationName === "")
-        {
-            noteDesc.style.display = "initial";
-            noteDesc.nextElementSibling.style.display = "initial";
-            noteDesc.style.animation = "yScaleUp 0.3s forwards";
-            noteDesc.nextElementSibling.style.animation = "yScaleUp 0.3s forwards ease-out";
-        }
-        else
-        {
-            // noteDesc.style.display = "none";
-            // noteDesc.nextElementSibling.style.display = "none";
-            noteDesc.style.animation = "yScaleDown 0.3s reverse forwards";
-            noteDesc.nextElementSibling.style.animation = "yScaleDown 0.3s reverse forwards ease-out";
-        }
+    //Outer Handlers - aka Inner Events - aka Methods for Delegation
+    InEventNoteSwipeUp(pNote){
+        this.OutEventNoteEdited(pNote);
     }
-    FoldNote(pNote){
-
+    InEventNoteSwipeDown(pNote){
+        console.log(pNote);
     }
-    //Aux
-    
+    InEventNoteSwipeLeft(pNote){
+        console.log(pNote);
+    }
+    InEventNoteSwipeRight(pNote){
+        this.OutEventNoteSelected(pNote);
+    }
+    //Events - aka Outer Events
+    OutEventNoteEdited(pNote){
+        let noteIndex = this.NoteIndex(pNote);
+        let title = pNote.querySelector(".noteTitle").innerText;
+        let desc = pNote.querySelector(".noteDesc").innerText;
+        let tagField = pNote.querySelector(".noteTagField").innerText.split("#").splice(1);
+        let noteInfo = {title, desc, tagField, noteIndex};
+        this.Emit("noteEdited", noteInfo);
+    }
+    OutEventNoteSelected(pNote){
+        let noteIndex = this.NoteIndex(pNote);
+        this.Emit("noteSelected", noteIndex);
+    }
 }

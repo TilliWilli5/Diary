@@ -1,3 +1,9 @@
+body
+{
+    display: flex;
+    flex-direction: column;
+    height:100%
+}
 #diary
 {
     /*border-radius:2px;
@@ -7,11 +13,13 @@
     flex-direction: column;
     font-size:2em;
     color:slategrey;
+    flex:1;
 }
 #noteList
 {
     display: flex;
     flex-direction: column;
+    flex:9;
 }
     .note
     {
@@ -19,6 +27,7 @@
         flex-wrap: wrap;
         position:relative;
         cursor: pointer;
+        /*border-bottom:1px solid lightgrey;*/
     }
         /*.note::before
         {
@@ -39,6 +48,7 @@
         }*/
     .noteHandle
     {
+        display:none;
         text-align: center;
         border-radius:0.4em;
         width:0.4em;
@@ -51,10 +61,11 @@
         margin-bottom:auto;
         /*Отступ для последующей записи*/
         margin-right:8px;
+        transition:border-width 0.2s, border-color 0.2s;
     }
         .noteHandle:hover
         {
-            border-width: 0.1em;
+            border-width: 0.2em;
             border-color: deepskyblue;
         }
         .noteHandle:hover 
@@ -66,10 +77,23 @@
         cursor:inherit;
         display:flex;
         flex-direction: column;
+        position:relative;
+        flex:1;
     }
+        .noteBody:hover::before
+        {
+            content:"";
+            position:absolute;
+            width:0.5%;
+            height:100%;
+            border-left:2px solid slategrey;
+            border-top:2px solid slategrey;
+            border-bottom:2px solid slategrey;
+        }
         .noteTitle
         {
             text-align: left;
+            margin-left:8px;
         }
             .noteTitle:hover
             {
@@ -84,6 +108,7 @@
             display:none;
             max-height: 0;
             overflow: hidden;
+            margin-left:8px;
             /*border:1px solid black;*/
             /*animation:yScaleUp 1s forwards;*/
         }
@@ -92,10 +117,11 @@
             display:none;
             max-height: 0;
             overflow: hidden;
+            margin-left:8px;
             /*border:1px solid black;*/
             /*animation:yScaleUp 1s forwards;*/
         }
-    .noteUnderline, .noteOverline
+    /*.noteUnderline, .noteOverline
     {
         border-left:0px;
         border-right:0px;
@@ -105,7 +131,7 @@
         transform: scale(0.0, 1.0);
         margin-top:0px;
         margin-bottom:0px;
-    }
+    }*/
         /*note:hove .noteUnderline
         {
             border-left:0px;
@@ -125,6 +151,8 @@ Footer part
 {
     display: flex;
     justify-content: space-around;
+    flex:1;
+    /*align-self: flex-end;*/
 }
     .diaryActionButton
     {

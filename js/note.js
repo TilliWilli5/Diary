@@ -1,6 +1,7 @@
-class Note
+class Note extends Emitter
 {
     constructor(pTitle, pDesc, pTags){
+        super();
         this.view = null;
         this.isHidden = true;
         this.isFolded = true;
@@ -16,7 +17,21 @@ class Note
         //Assigning handlers
         let eventName = document.body.ontouchstart?"touchstart":"click";
         this.AssignHandlers(".noteTitle", eventName, [this.NoteBodyClickHandler]);
-
+        let hammerManager = new Hammer.Manager(this.view, {
+            recognizers:[
+                [Hammer.Swipe, {direction:Hammer.DIRECTION_ALL}]
+            ]
+        });
+        hammerManager.on("swipe", function(pEvent){
+            let note = util.FindParent(pEvent.target, ".note", true);
+            switch(pEvent.direction)
+            {
+                case Hammer.DIRECTION_UP:note.ctrl.Emit("swipeUp", note);break;
+                case Hammer.DIRECTION_DOWN:note.ctrl.Emit("swipeDown", note);break;
+                case Hammer.DIRECTION_LEFT:note.ctrl.Emit("swipeLeft", note);break;
+                case Hammer.DIRECTION_RIGHT:note.ctrl.Emit("swipeRight", note);break;
+            }
+        });
             let theHandle = document.createElement("div");
             theHandle.className = "noteHandle";
         theView.appendChild(theHandle);
@@ -62,7 +77,6 @@ class Note
         util.FindParent(pEvent.target, ".note").ctrl.Expand();
     }
     //Events
-
     //Aux
     Show(){
 
@@ -91,6 +105,12 @@ class Note
         }
     }
     Fold(){
-
+        let desc = this.view.querySelector(".noteDesc");
+        let tagField = this.view.querySelector(".noteTagField");
+        if(desc.style.animationName === "yScaleUp")
+        {
+            desc.style.animation = "yScaleDown 0.3s reverse forwards";
+            tagField.style.animation = "yScaleDown 0.3s reverse forwards ease-out";
+        }
     }
 }
