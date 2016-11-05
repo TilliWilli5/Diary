@@ -6,8 +6,6 @@ body
 }
 #diary
 {
-    /*border-radius:2px;
-    border:1px solid lightgrey;*/
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -27,7 +25,6 @@ body
         flex-wrap: wrap;
         position:relative;
         cursor: pointer;
-        /*border-bottom:1px solid lightgrey;*/
     }
         .note::before
         {
@@ -63,10 +60,6 @@ body
             border-color: grey;
             background-color:grey;
         }
-        /*.noteHandle:hover 
-        {
-            border-color: deepskyblue;
-        }*/
     .noteBody
     {
         cursor:inherit;
@@ -75,6 +68,15 @@ body
         position:relative;
         flex:1;
     }
+        /*Чтобы удалить серые засечки перед записями - удали класс .noteBody::before*/
+        .noteBody::before
+        {
+            content:"";
+            position:absolute;
+            width:0.5%;
+            height:calc(100% + 1px);
+            border-left:4px solid grey;
+        }
         .noteBody:hover::before
         {
             content:"";
@@ -82,8 +84,6 @@ body
             width:0.5%;
             height:calc(100% + 1px);
             border-left:4px solid grey;
-            /*border-top:2px solid slategrey;
-            border-bottom:2px solid slategrey;*/
         }
         .noteBodyFullView::before
         {
@@ -92,8 +92,6 @@ body
             width:0.5%;
             height:calc(100% + 1px);
             border-left:4px solid grey;
-            /*border-top:2px solid slategrey;
-            border-bottom:2px solid slategrey;*/
         }
         .noteTitle
         {
@@ -114,8 +112,6 @@ body
             max-height: 0;
             overflow: hidden;
             margin-left:8px;
-            /*border:1px solid black;*/
-            /*animation:yScaleUp 1s forwards;*/
         }
         .noteTagField
         {
@@ -123,8 +119,6 @@ body
             max-height: 0;
             overflow: hidden;
             margin-left:8px;
-            /*border:1px solid black;*/
-            /*animation:yScaleUp 1s forwards;*/
         }
 /*
 ======================================
@@ -137,7 +131,6 @@ Footer part
     justify-content: space-around;
     flex:1;
     max-height:0;
-    /*align-self: flex-end;*/
 }
     .diaryActionButton
     {
