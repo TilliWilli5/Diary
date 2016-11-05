@@ -47,7 +47,7 @@ body
         border-radius:0.4em;
         width:0.4em;
         height:0.4em;
-        border:1px solid slategrey;
+        border:2px solid grey;
         /*Отступ слева*/
         margin-left:8px;
         /*Автоматическое выравнивание по высоте*/
@@ -55,17 +55,18 @@ body
         margin-bottom:auto;
         /*Отступ для последующей записи*/
         margin-right:8px;
-        transition:border-width 0.2s, border-color 0.2s;
+        transition:border-width 0.2s, border-color 0.2s, background-color 0.2s;
     }
         .noteHandle:hover
         {
             border-width: 0.2em;
-            border-color: deepskyblue;
+            border-color: grey;
+            background-color:grey;
         }
-        .noteHandle:hover 
+        /*.noteHandle:hover 
         {
             border-color: deepskyblue;
-        }
+        }*/
     .noteBody
     {
         cursor:inherit;
@@ -75,6 +76,16 @@ body
         flex:1;
     }
         .noteBody:hover::before
+        {
+            content:"";
+            position:absolute;
+            width:0.5%;
+            height:calc(100% + 1px);
+            border-left:4px solid grey;
+            /*border-top:2px solid slategrey;
+            border-bottom:2px solid slategrey;*/
+        }
+        .noteBodyFullView::before
         {
             content:"";
             position:absolute;

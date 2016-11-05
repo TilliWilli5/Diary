@@ -100,6 +100,7 @@ class Note extends Emitter
             tagField.style.display = "initial";
             desc.style.animation = "yScaleUp 0.3s forwards";
             tagField.style.animation = "yScaleUp 0.3s forwards ease-out";
+            this.view.querySelector(".noteBody").classList.add("noteBodyFullView");
         }
     }
     Fold(){
@@ -109,6 +110,7 @@ class Note extends Emitter
         {
             desc.style.animation = "yScaleDown 0.3s reverse forwards";
             tagField.style.animation = "yScaleDown 0.3s reverse forwards ease-out";
+            this.view.querySelector(".noteBody").classList.remove("noteBodyFullView");
         }
     }
     Toogle(){
@@ -120,11 +122,13 @@ class Note extends Emitter
             tagField.style.display = "initial";
             desc.style.animation = "yScaleUp 0.3s forwards";
             tagField.style.animation = "yScaleUp 0.3s forwards ease-out";
+            this.view.querySelector(".noteBody").classList.add("noteBodyFullView");
         }
         else
         {
             desc.style.animation = "yScaleDown 0.3s reverse forwards";
             tagField.style.animation = "yScaleDown 0.3s reverse forwards ease-out";
+            this.view.querySelector(".noteBody").classList.remove("noteBodyFullView");
         }
     }
 }
