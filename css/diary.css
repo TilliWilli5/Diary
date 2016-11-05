@@ -29,23 +29,17 @@ body
         cursor: pointer;
         /*border-bottom:1px solid lightgrey;*/
     }
-        /*.note::before
+        .note::before
         {
             content:"";
             position:absolute;
-            border-top:1px solid lightgrey;
-            border-bottom:1px solid lightgrey;
+            border-bottom:2px solid lightgrey;
+            border-image: linear-gradient(to right, lightgrey, rgba(0,0,0,0));
+            border-image-slice: 1;
             width:100%;
             height:100%;
-            transform: scale(0, 1);
-            transition: transform 0.4s;
             pointer-events: none;
         }
-        .note:hover::before
-        {
-            transform: scale(1, 1);
-            transition: transform 0.4s;
-        }*/
     .noteHandle
     {
         display:none;
@@ -85,10 +79,10 @@ body
             content:"";
             position:absolute;
             width:0.5%;
-            height:100%;
-            border-left:2px solid slategrey;
-            border-top:2px solid slategrey;
-            border-bottom:2px solid slategrey;
+            height:calc(100% + 1px);
+            border-left:4px solid grey;
+            /*border-top:2px solid slategrey;
+            border-bottom:2px solid slategrey;*/
         }
         .noteTitle
         {
@@ -121,27 +115,6 @@ body
             /*border:1px solid black;*/
             /*animation:yScaleUp 1s forwards;*/
         }
-    /*.noteUnderline, .noteOverline
-    {
-        border-left:0px;
-        border-right:0px;
-        border-top:0px;
-        border-bottom:1px solid lightgrey;
-        flex:100%;
-        transform: scale(0.0, 1.0);
-        margin-top:0px;
-        margin-bottom:0px;
-    }*/
-        /*note:hove .noteUnderline
-        {
-            border-left:0px;
-            border-right:0px;
-            border-top:0px;
-            border-bottom:1px solid lightgrey;
-            flex:100%;
-            transform: scale(0.0, 1.0);
-        }*/
-
 /*
 ======================================
 Footer part
